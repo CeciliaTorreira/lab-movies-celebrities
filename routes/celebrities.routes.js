@@ -26,7 +26,7 @@ router.post("/create", (req, res, next)=>{
   })
   .then(()=>{
    console.log("Nueva celebridad añadida")
-   //res.redirect("/celebrities/list")  // Vista no creada tosavía
+   res.redirect("/celebrities/celebrities")
    })
   .catch((error)=>{
     next(error)
