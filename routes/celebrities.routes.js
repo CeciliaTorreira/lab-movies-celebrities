@@ -32,8 +32,24 @@ router.post("/create", (req, res, next)=>{
     next(error)
   })
 
-
 })
+
+
+//* GET "/celebrities/celebrities" => Renderiza la vista con la lista de celebrities
+
+router.get("/celebrities", (req, res, next)=>{
+    Celebrity.find()
+    .then((allCelebrities) =>{
+      res.render("celebrities/celebrities.hbs",{
+        allCelebrities: allCelebrities
+      })
+    })
+    .catch((error)=>{
+        next(error)
+    })
+})
+
+
 
 
 
