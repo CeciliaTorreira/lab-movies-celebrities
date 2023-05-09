@@ -41,7 +41,19 @@ router.post("/create", (req, res, next)=>{
   
   })
 
+//* GET "/movies/movies" => Renderiza la vista con la lista de todas las películas
 
+router.get("/movies", (req, res, next)=>{
+    Movie.find()
+    .then((allMovies)=>{
+        res.render("movies/movies.hbs", {
+            allMovies: allMovies
+        })
+    })
+    .catch((error)=>{
+        next(error)
+    })
+})
 
 
 
