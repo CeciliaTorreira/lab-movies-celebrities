@@ -1,4 +1,5 @@
 const Movie = require("../models/Movie.model.js");
+const Celebrity = require("../models/Celebrity.model.js")
 
 // starter code in both routes/celebrities.routes.js and routes/movies.routes.js
 const router = require("express").Router();
@@ -33,7 +34,7 @@ router.post("/create", (req, res, next)=>{
     })
     .then(()=>{
      console.log("Nueva película añadida")
-    //  res.redirect("/movies/list") // No creada todavía
+    res.redirect("/movies/movies") 
      })
     .catch((error)=>{
       next(error)
@@ -51,6 +52,24 @@ router.get("/movies", (req, res, next)=>{
         })
     })
     .catch((error)=>{
+        next(error)
+    })
+})
+
+
+
+//* GET "/movies/:id" => Renderiza la vista individual de una película con sus detalles
+
+router.get("/:id", (req, res, next)=>{
+
+    Movie.findById(req.params.id)
+    .populate("cast")
+    .then((oneMovie) => {
+        res.render("movies/movie-details.hbs", {
+          oneMovie: oneMovie
+        })
+    })
+    .catch((error) => {
         next(error)
     })
 })
